@@ -6,7 +6,7 @@ module.exports = {
     find: [],
     get: [],
     create: context => {
-      if(context.data && context.params.user_id == null) {
+      if(context.data && context.params.userId != null) {
         context.data.userId = context.params.userId;
       }
     },

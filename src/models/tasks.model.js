@@ -26,7 +26,8 @@ module.exports = function (app) {
   tasks.associate = function (models) {
     tasks.belongsTo(models.users, {
       foreignKey: {
-        name: 'user_id',
+        name: 'userId',
+        field: 'user_id',
         allowNull: false
       }
     });
