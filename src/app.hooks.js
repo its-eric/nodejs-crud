@@ -1,5 +1,6 @@
 // Application hooks that run for every service
 const logger = require('./hooks/logger');
+const snakecaseResult = require('./hooks/snakecaseResult');
 
 module.exports = {
   before: {
@@ -13,7 +14,7 @@ module.exports = {
   },
 
   after: {
-    all: [ logger() ],
+    all: [ logger(), snakecaseResult() ],
     find: [],
     get: [],
     create: [],

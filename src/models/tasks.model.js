@@ -11,19 +11,24 @@ module.exports = function (app) {
       type: DataTypes.TEXT
     },
     dateTime: {
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
+      field: 'date_time'
     }
   }, {
     hooks: {
       beforeCount(options) {
         options.raw = true;
       }
-    }
+    },
+    timestamps: false
   });
 
   tasks.associate = function (models) {
     tasks.belongsTo(models.users, {
-      foreignKey: 'user_id'
+      foreignKey: {
+        name: 'user_id',
+        allowNull: false
+      }
     });
   };
 

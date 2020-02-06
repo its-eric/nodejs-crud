@@ -5,7 +5,11 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: utils.mapUserIdToData,
+    create: context => {
+      if(context.data && context.params.user_id == null) {
+        context.data.userId = context.params.userId;
+      }
+    },
     update: utils.mapUserIdToData,
     patch: utils.mapUserIdToData,
     remove: []

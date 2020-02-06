@@ -13,12 +13,12 @@ module.exports = {
   },
 
   after: {
-    all: [
-      context => {
-        context.result = snakecaseKeys(context.result, {deep: true});
-        return context;
-      },
-    ],
+    all: [],
+    //   context => {
+    //     context.result = snakecaseKeys(context.result, {deep: true});
+    //     return context;
+    //   },
+    // ],
     find: [],
     get: [],
     create: [],
