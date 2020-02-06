@@ -1,24 +1,18 @@
-const camelcaseKeys = require('camelcase-keys');
-const snakecaseKeys = require('snakecase-keys');
+const utils = require('../../utils');
 
 module.exports = {
   before: {
     all: [],
     find: [],
     get: [],
-    create: [],
-    update: [],
-    patch: [],
+    create: utils.mapUserIdToData,
+    update: utils.mapUserIdToData,
+    patch: utils.mapUserIdToData,
     remove: []
   },
 
   after: {
-    all: [
-      context => {
-        context.result = snakecaseKeys(context.result, {deep: true});
-        return context;
-      },
-    ],
+    all: [],
     find: [],
     get: [],
     create: [],

@@ -13,7 +13,8 @@ module.exports = function (app) {
     },
     username: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true
     },
     firstName: {
       type: DataTypes.STRING,
@@ -35,8 +36,7 @@ module.exports = function (app) {
   });
 
   users.associate = function (models) { // eslint-disable-line no-unused-vars
-    // Define associations here
-    // See http://docs.sequelizejs.com/en/latest/docs/associations/
+    users.hasMany(models.tasks);
   };
 
   return users;
