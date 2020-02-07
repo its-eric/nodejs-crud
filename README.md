@@ -1,6 +1,6 @@
 # nodejs-crud
 
-> A Node.JS-based API by Eric Prates, made with feathers to Feather.
+A Node.JS-based API by Eric Prates, made with Feathers to Fethr.
 
 ## About
 
@@ -8,50 +8,49 @@ This project uses [Feathers](http://feathersjs.com). An open source web framewor
 
 ## Getting Started
 
-Getting up and running is as easy as 1, 2, 3.
+> :warning: You need [Docker](https://docs.docker.com/install/) installed. On older versions of Windows, run the scripts using [Git Bash](https://git-scm.com/downloads).
 
-1. Make sure you have [NodeJS](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed.
-2. Install your dependencies
+Getting up and running is as easy as:
 
-    ```
-    cd path/to/nodejs-crud; npm install
-    ```
-
-3. Start your app
-
-    ```
-    npm start
-    ```
+```
+cp .env.example .env
+(edit with your favorite editor)
+./build_dev.sh
+```
 
 ## Testing
 
-Simply run `npm test` and all your tests in the `test/` directory will be run.
+Simply run `docker-compose exec api npm run test` and all your tests in the `test/` directory will be run, plus the linting.
 
-## Scaffolding
+## Autocritic
 
-Feathers has a powerful command line interface. Here are a few things it can do:
+*  The framework of choice here is one which does NOT encourage nested routes by default;
+   however so far only a few lines of code are necessary to enable that. That's why I still chose
+   it for speed, ecosystem and feature set.
 
-```
-$ npm install -g feathers-cli             # Install Feathers CLI
+*  The REST concept is such that a PUT means a total overwrite of the object, while a PATCH
+   is what allows a partial update. I have followed that concept here, at the risk of 
+   not fulfilling one of your written down curl tests. We should talk about it -- I can throw
+   the RESTful concept in the trash if that's what the client really needs, too.
 
-$ feathers generate service               # Generate a new Service
-$ feathers generate hook                  # Generate a new Hook
-$ feathers generate model                 # Generate a new Model
-$ feathers help                           # Show all commands
-```
+*  When we first put up the database container, it is useless to define a dependency
+   to it from the api. It will take a while to accept connections, so the api will
+   fail the first time we build for production.
+   This is a known issue with MySQL and MariaDB docker images.
 
-## Help
+*  There is also a possibility to do the ORM-related code in object-oriented style
+   with sequelize, we could benefit from it in a larger project. Boilerplate-code
+   generation tools exist which can take care of a transition.
 
-For more information on all the things you can do with Feathers visit [docs.feathersjs.com](http://docs.feathersjs.com).
+*  In the testing realm the setup code is repeated A LOT (A LOT!), so some 'util' methods should
+   still be abstracted out to be reused throughout the tests. This is because of the nested
+   routes concept, but probably just abstracting out the repeated parts is preferrable to having chained calls to test the functionality (violating thus the independency of each test).
+
+*  A decision should also be made on how to save the dates in the db; maybe as strings is
+   a better option to keep it db-agnostic and testable.
 
 ## Changelog
 
-__0.1.0__
+__1.0.0__
 
 - Initial release
-
-## License
-
-Copyright (c) 2016
-
-Licensed under the [MIT license](LICENSE).
