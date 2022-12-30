@@ -52,7 +52,7 @@
     "faker": "^4.1.0",
     "feathers-memory": "^4.1.0",
     "istanbul": "^0.4.5",
-    "mocha": "^7.0.1",
+    "mocha": "^10.2.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.5",
     "sqlite3": "^4.1.1"
